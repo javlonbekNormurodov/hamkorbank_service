@@ -1,0 +1,61 @@
+definitions:
+  http.Response:
+    properties:
+      data:
+        type: object
+      description:
+        type: string
+      status:
+        type: string
+    type: object
+info:
+  contact: {}
+  description: This is a api gateway
+  license: {}
+paths:
+  /v1/phone:
+    get:
+      consumes:
+      - application/json
+      description: This api for getting all phones from db
+      parameters:
+      - description: limit
+        in: query
+        name: limit
+        type: integer
+      - description: page
+        in: query
+        name: page
+        type: integer
+      produces:
+      - application/json
+      summary: This api for getting all phones
+  /v1/phone/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Getting phone number by their id
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Response data
+          schema:
+            allOf:
+            - $ref: '#/definitions/http.Response'
+            - properties:
+                data:
+                  type: string
+              type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/http.Response'
+      summary: Get Phone number by id
+swagger: "2.0"
